@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vihsm — hosted tools, apps, and websites</title>
+  <meta name="description" content="Vihsm builds and hosts APIs, health apps, and websites for clinics and local firms. Hyderabad. Domain stays in the client's name.">
+  <link rel="canonical" href="https://vihsmai.com/">
+  <meta property="og:title" content="Vihsm — hosted tools, apps, and websites">
+  <meta property="og:description" content="APIs, health apps, and websites with monthly hosting. Based in Hyderabad.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vihsmai.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,450;6..72,560&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%231c1915' width='32' height='32'/%3E%3Ctext x='6' y='23' fill='%23f4efe6' font-family='Georgia' font-size='18'%3EV%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top">Vihsm</a>
+    <nav class="nav" aria-label="Page">
+      <a href="#apis">APIs</a>
+      <a href="#apps">Apps</a>
+      <a href="#websites">Websites</a>
+      <a href="#hosting">Hosting</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">Hyderabad · hosted on our own server</p>
+      <h1>Tools, apps, and websites that stay online.</h1>
+      <p class="lede">Vihsm is the company site. We host what we build: document APIs, health apps, a study planner, and websites for clinics and local firms. A named person answers if something breaks.</p>
+      <div class="hero-actions">
+        <a class="button" href="#contact">Talk to Vihsm</a>
+        <a class="button button-quiet" href="#websites">Websites and hosting</a>
+      </div>
+    </section>
+
+    <section class="band" aria-label="What this site is">
+      <ul class="facts">
+        <li><strong>One company</strong><span>Not a personal résumé. Products and client work only.</span></li>
+        <li><strong>Your domain</strong><span>A client site’s domain stays in the client’s name.</span></li>
+        <li><strong>Monthly hosting</strong><span>SSL, backups, and a person who picks up.</span></li>
+      </ul>
+    </section>
+
+    <section id="apis" class="section">
+      <div class="section-head">
+        <h2>APIs</h2>
+        <p>Six endpoints a developer can call. Each one does a narrow job. None of them is a licence, a bureau, or a medical opinion.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <p class="kicker">Documents</p>
+          <h3>Invoice Extract</h3>
+          <p>Upload an Indian GST invoice — PDF, photo, or pasted text — and get GSTIN, invoice number, date, HSN lines, and CGST, SGST, and IGST.</p>
+          <p class="guard">Heuristic extraction. A person should review it before filing or payment. Not a certified e-invoice tool.</p>
+          <a href="https://invoice-extract.vihsmai.com/docs" target="_blank" rel="noopener">API docs</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Documents</p>
+          <h3>Duplicate Scan</h3>
+          <p>Find repeated pages across scanned PDFs and images. Borders are cropped so a date stamp on the edge does not hide a match.</p>
+          <p class="guard">Visual page similarity. Not fraud detection and not legal proof.</p>
+          <a href="https://docscan.vihsmai.com" target="_blank" rel="noopener">Open the app</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Series</p>
+          <h3>Forecast</h3>
+          <p>Send a JSON series. Get a forecast with p10, p50, and p90 bands, plus anomaly flags. No model for you to train.</p>
+          <p class="guard">A utility endpoint. Not a finance or planning platform, and not an accuracy guarantee.</p>
+          <a href="https://forecast.vihsmai.com/docs" target="_blank" rel="noopener">API docs</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Scores</p>
+          <h3>Risk Score</h3>
+          <p>Send loan-application or customer fields. Get a 0–1 score, a band, and a suggested next step, trained on public datasets.</p>
+          <p class="guard">Not a credit bureau. Not a substitute for underwriting. Must not be the sole basis for a credit, employment, or insurance decision.</p>
+          <a href="https://risk-score.vihsmai.com/docs" target="_blank" rel="noopener">API docs</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Health</p>
+          <h3>Homeo Assist</h3>
+          <p>A session-aware homeopathy consultation endpoint in 10 Indian languages, including Telugu and Hindi. OpenAI-compatible chat.</p>
+          <p class="guard">Educational suggestions only. Not a diagnosis and not a substitute for a qualified doctor.</p>
+          <a href="https://homeo-app.vihsmai.com/docs" target="_blank" rel="noopener">API docs</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Health</p>
+          <h3>Ayurved Assist</h3>
+          <p>The same integration pattern as Homeo Assist, for Ayurvedic remedy suggestions. Two domains, one way to connect.</p>
+          <p class="guard">Educational suggestions only. Not a diagnosis and not a substitute for a qualified doctor.</p>
+          <a href="https://ayurvedic-app.vihsmai.com/docs" target="_blank" rel="noopener">API docs</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="apps" class="section section-alt">
+      <div class="section-head">
+        <h2>Apps</h2>
+        <p>Interfaces on the same server, for households and students. Health apps inform. They do not treat.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card">
+          <p class="kicker">Household</p>
+          <h3>Homeopathy assistant</h3>
+          <p>Voice or text in your language, one profile per family member, a journal, and a path to a real doctor when it is not minor.</p>
+          <a href="https://homeo-app.vihsmai.com" target="_blank" rel="noopener">Open the app</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Household</p>
+          <h3>Ayurvedic assistant</h3>
+          <p>The same family journal and chat, framed around Ayurvedic remedies and daily routine.</p>
+          <a href="https://ayurvedic-app.vihsmai.com" target="_blank" rel="noopener">Open the app</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Students</p>
+          <h3>VidyaPath</h3>
+          <p>A weekly CBSE or ICSE study plan and practice built around the questions a student got wrong.</p>
+          <p class="guard">No promise of marks or rank.</p>
+          <a href="https://vidyapath.vihsmai.com" target="_blank" rel="noopener">Open VidyaPath</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="websites" class="section">
+      <div class="section-head">
+        <h2>Websites for clinics and local firms</h2>
+        <p>We design the site, put it on a domain in your name, and keep it online. The first proof is a hospital website we built and host in Tanuku. The live link is shared when that client has agreed.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card price">
+          <p class="kicker">Launch</p>
+          <h3>₹40,000–80,000</h3>
+          <p>Once. A mobile site of about 5–8 pages: WhatsApp, phone, map, contact, photos, and two rounds of revisions.</p>
+        </article>
+        <article class="card price card-focus">
+          <p class="kicker">Run</p>
+          <h3>₹2,500–6,000<span> / month</span></h3>
+          <p>Hosting, SSL, backups, uptime checks, and about an hour of small edits a month. Yearly prepay is available.</p>
+        </article>
+        <article class="card price">
+          <p class="kicker">Grow</p>
+          <h3>After 30 days</h3>
+          <p>Google Business posts, extra pages, or a small ad campaign. Ad spend is yours. It is not bundled into the first invoice.</p>
+        </article>
+      </div>
+      <ul class="plain">
+        <li>Domain and DNS stay in the client’s registrar account.</li>
+        <li>You can take the site with you. Hosting is not a lock.</li>
+        <li>Typical first clients: Ayurveda, homeopathy, dental, physio, labs, and small professional firms in Andhra Pradesh and Telangana.</li>
+      </ul>
+    </section>
+
+    <section id="hosting" class="section section-alt">
+      <div class="section-head">
+        <h2>What hosting means here</h2>
+        <p>Not “server space.” The site or API stays up, the padlock stays valid, a backup exists, and someone answers.</p>
+      </div>
+      <ol class="steps">
+        <li><strong>Build</strong><span>Pages, buttons, and the content you already have.</span></li>
+        <li><strong>Go live</strong><span>Your domain, DNS, SSL, and a link that opens on a phone.</span></li>
+        <li><strong>Keep it running</strong><span>Backups, small edits, and a monthly note that it is healthy.</span></li>
+      </ol>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div>
+        <h2>Contact</h2>
+        <p>Write with what you need: an API, an app question, or a website. Include your city and a phone number.</p>
+        <p class="mail"><a id="email-link" href="mailto:hello@vihsmai.com">hello@vihsmai.com</a></p>
+        <p><a class="button" id="whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a></p>
+        <p class="fine" id="whatsapp-note"></p>
+      </div>
+      <div class="contact-card">
+        <p class="kicker">Vihsm</p>
+        <p>Hyderabad, Telangana</p>
+        <p>Work across Andhra Pradesh and Telangana.</p>
+        <p class="fine">Health tools are information. A doctor decides care. Document tools need a human check before anyone files or pays.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Vihsm · vihsmai.com</span>
+    <span>Company portfolio</span>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>
