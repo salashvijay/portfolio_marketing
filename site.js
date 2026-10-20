@@ -18,5 +18,4 @@ if (digits.length >= 10) {
   note.textContent = "";
 } else {
   wa.classList.add("hidden");
-  note.textContent = "WhatsApp appears here after a number is added in site.js.";
 }
