@@ -13,7 +13,7 @@ const note = document.getElementById("whatsapp-note");
 const digits = (SITE.whatsapp || "").replace(/\D/g, "");
 
 if (digits.length >= 10) {
-  const text = encodeURIComponent("Hello Vihsm. I want to ask about hosting.");
+  const text = encodeURIComponent("Hello Vihsm. I have a job to automate.");
   wa.href = "https://wa.me/" + digits + "?text=" + text;
   note.textContent = "";
 } else {
