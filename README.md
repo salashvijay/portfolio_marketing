@@ -5,7 +5,8 @@ Live (once deployed): `https://labs.vihsmai.com`
 | Page | Tool | Leads to (paid offer) |
 |---|---|---|
 | `deadlines.html` | Compliance deadline radar (`data/deadlines.json`) | All offers |
-| `einvoice.html` | UBL e-invoice checker, EN 16931 core fields and totals (`js/einvoice.js`) | Invoice to E-Invoice |
+| `einvoice.html` | E-invoice checker: UBL and CII (Factur-X, ZUGFeRD, XRechnung), incl. the XML inside a Factur-X PDF; EN 16931 core fields and totals (`js/einvoice.js`) | Invoice to E-Invoice |
+| `peppol-id.html` | Peppol ID builder and checker (scheme list v9.7, check digits) + how to find a buyer's Peppol ID (`js/peppol.js`) | Invoice to E-Invoice |
 | `bias.html` | Selection/scoring rates and impact ratios, NYC LL144 method (`js/impact.js`) | AI Bias Audit |
 | `keys.html` | Leaked-key scanner for the user's own code (`js/secrets.js`) | Vibe App Security Audit |
 | `ai-disclosure.html` | EU AI Act Article 50 disclosure generator | AI Transparency Pack |
@@ -32,9 +33,9 @@ npm test        # logic tests + simulated-browser tests of every page
 - **One new tool a week** from the backlog, with tests, then add it to `index.html` and `sitemap.xml`.
 
 ### Tool backlog
-1. CII (Factur-X / ZUGFeRD) support in the e-invoice checker
-2. Peppol participant lookup explainer (how to find a buyer's Peppol ID)
-3. India GST e-invoice 30-day IRP deadline calculator
-4. WCAG quick check for a pasted HTML snippet (contrast, alt text, labels)
-5. DPDP consent-notice generator (India)
-6. Duplicate invoice finder for a pasted CSV (invoice number, amount, date, supplier)
+Done: CII (Factur-X / ZUGFeRD) support in the e-invoice checker; Peppol ID builder and explainer (1 Nov 2026).
+
+1. India GST e-invoice 30-day IRP deadline calculator
+2. WCAG quick check for a pasted HTML snippet (contrast, alt text, labels)
+3. DPDP consent-notice generator (India)
+4. Duplicate invoice finder for a pasted CSV (invoice number, amount, date, supplier)

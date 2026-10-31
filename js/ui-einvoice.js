@@ -2,7 +2,7 @@
   "use strict";
   var $ = function (s) { return document.querySelector(s); };
   var esc = function (v) { return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
-  var MAX = 5 * 1024 * 1024;
+  var MAX = 5 * 1024 * 1024, MAX_PDF = 20 * 1024 * 1024;
 
   function show(r) {
     var h = "";
@@ -23,15 +23,31 @@
   }
   function readFile(file) {
     if (!file) return;
-    if (file.size > MAX) { $("#out").innerHTML = '<p class="verdict bad">That file is over 5 MB. E-invoice XML files are usually much smaller. Is it the right file?</p>'; return; }
+    var isPdf = /\.pdf$/i.test(file.name || "") || file.type === "application/pdf";
+    if (file.size > (isPdf ? MAX_PDF : MAX)) { $("#out").innerHTML = '<p class="verdict bad">That file is over ' + (isPdf ? "20" : "5") + " MB. E-invoice files are usually much smaller. Is it the right file?</p>"; return; }
     var rd = new FileReader();
-    rd.onload = function () { $("#xml").value = rd.result; run(); };
-    rd.readAsText(file);
+    if (!isPdf) {
+      rd.onload = function () { $("#xml").value = rd.result; run(); };
+      rd.readAsText(file);
+      return;
+    }
+    rd.onload = function () {
+      window.VLEInvoice.xmlFromPdf(new Uint8Array(rd.result)).then(function (xml) {
+        if (xml) { $("#xml").value = xml; run(); return; }
+        $("#out").innerHTML = '<p class="verdict bad">No e-invoice XML found inside this PDF.</p>' +
+          "<p>A Factur-X or ZUGFeRD PDF carries the invoice data as an attached XML file. This one has none, so it is probably a plain PDF invoice. A plain PDF is not a structured e-invoice under mandates such as Germany's or France's. (Encrypted PDFs can't be read here.)</p>";
+      }, function () {
+        $("#out").innerHTML = '<p class="verdict bad">This browser could not open the PDF attachment.</p><p>Save the attached XML from your PDF reader (look for an attachments panel; the file is usually named factur-x.xml, zugferd-invoice.xml or xrechnung.xml) and drop that instead.</p>';
+      });
+    };
+    rd.readAsArrayBuffer(file);
   }
   $("#go").addEventListener("click", run);
-  $("#sample").addEventListener("click", function () {
-    fetch("data/sample-invoice.xml").then(function (r) { return r.text(); }).then(function (t) { $("#xml").value = t; run(); });
-  });
+  function sample(url) {
+    return function () { fetch(url).then(function (r) { return r.text(); }).then(function (t) { $("#xml").value = t; run(); }); };
+  }
+  $("#sample").addEventListener("click", sample("data/sample-invoice.xml"));
+  $("#sample-cii").addEventListener("click", sample("data/sample-invoice-cii.xml"));
   $("#file").addEventListener("change", function (e) { readFile(e.target.files[0]); });
   var d = $("#drop");
   ["dragenter", "dragover"].forEach(function (ev) { d.addEventListener(ev, function (e) { e.preventDefault(); d.classList.add("over"); }); });

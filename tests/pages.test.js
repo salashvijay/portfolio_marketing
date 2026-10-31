@@ -22,7 +22,7 @@ function page(name) {
 const tick = () => new Promise((r) => setTimeout(r, 30));
 
 test("no inline scripts or external resources (CSP-safe)", () => {
-  for (const f of ["index.html", "deadlines.html", "einvoice.html", "bias.html", "keys.html", "ai-disclosure.html"]) {
+  for (const f of ["index.html", "deadlines.html", "einvoice.html", "bias.html", "keys.html", "ai-disclosure.html", "peppol-id.html"]) {
     const h = fs.readFileSync(path.join(ROOT, f), "utf8");
     assert.ok(!/<script>(?!\s*<\/script>)/.test(h), f + " has an inline script");
     assert.ok(!/<script[^>]+src="https?:/.test(h) && !/<link[^>]+href="https?:\/\/(?!labs\.vihsmai)/.test(h.replace(/<link rel="canonical"[^>]*>/, "")), f + " loads an external resource");
@@ -44,6 +44,43 @@ test("e-invoice page: sample passes, broken XML fails", async () => {
   w.document.querySelector("#xml").value = "<Invoice xmlns='urn:oasis:names:specification:ubl:schema:xsd:Invoice-2'/>";
   w.document.querySelector("#go").click();
   assert.match(w.document.querySelector("#out").textContent, /problems found/);
+  w.document.querySelector("#sample-cii").click(); await tick();
+  assert.match(w.document.querySelector("#out").textContent, /basic checks pass \(EN 16931/);
+});
+test("e-invoice page: a Factur-X PDF dropped on the page is read", async () => {
+  const w = page("einvoice.html");
+  w.DecompressionStream = DecompressionStream;
+  const zlib = require("node:zlib");
+  const xml = fs.readFileSync(path.join(ROOT, "data", "sample-invoice-cii.xml"));
+  const data = zlib.deflateSync(xml);
+  const head = ["%PDF-1.7", "5 0 obj", "<< /Type /EmbeddedFile /Filter /FlateDecode /Length " + data.length + " >>", "stream", ""].join(String.fromCharCode(10));
+  const pdf = Buffer.concat([Buffer.from(head), data, Buffer.from(String.fromCharCode(10) + "endstream endobj %%EOF")]);
+  const file = new w.File([pdf], "invoice.pdf", { type: "application/pdf" });
+  const input = w.document.querySelector("#file");
+  Object.defineProperty(input, "files", { value: [file] });
+  input.dispatchEvent(new w.Event("change"));
+  for (let i = 0; i < 20 && !/basic checks/.test(w.document.querySelector("#out").textContent); i++) await tick();
+  assert.match(w.document.querySelector("#out").textContent, /basic checks pass/);
+  assert.match(w.document.querySelector("#xml").value, /FA-2026-0107/);
+});
+test("peppol page: builds a Belgian ID, flags a typo, escapes input", () => {
+  const w = page("peppol-id.html");
+  const d = w.document;
+  assert.strictEqual(d.querySelector("#scheme").value, "0208");
+  assert.match(d.querySelector("#tip").textContent, /enterprise number/);
+  d.querySelector("#num").value = "BE 0123.456.749";
+  d.querySelector("#build").click();
+  assert.match(d.querySelector("#out").textContent, /0208:0123456749 · check digit OK/);
+  assert.match(d.querySelector("#out").textContent, /iso6523-actorid-upis::0208:0123456749/);
+  d.querySelector("#pid").value = "0208:0123456748";
+  d.querySelector("#check").click();
+  assert.match(d.querySelector("#out").textContent, /check digit doesn't match/);
+  d.querySelector("#pid").value = "9930:<img src=x onerror=alert(1)>";
+  d.querySelector("#check").click();
+  assert.strictEqual(d.querySelector("#out img"), null);
+  d.querySelector("#country").value = "DE"; d.querySelector("#country").dispatchEvent(new w.Event("change"));
+  assert.strictEqual(d.querySelector("#scheme").value, "9930");
+  assert.match(d.querySelector("#tip").textContent, /Leitweg-ID/);
 });
 test("bias page: sample shows three tables with impact ratios", async () => {
   const w = page("bias.html");
