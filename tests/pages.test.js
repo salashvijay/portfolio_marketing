@@ -22,7 +22,7 @@ function page(name) {
 const tick = () => new Promise((r) => setTimeout(r, 30));
 
 test("no inline scripts or external resources (CSP-safe)", () => {
-  for (const f of ["index.html", "deadlines.html", "einvoice.html", "bias.html", "keys.html", "ai-disclosure.html", "peppol-id.html"]) {
+  for (const f of ["index.html", "deadlines.html", "einvoice.html", "bias.html", "keys.html", "ai-disclosure.html", "peppol-id.html", "gst-irp.html"]) {
     const h = fs.readFileSync(path.join(ROOT, f), "utf8");
     assert.ok(!/<script>(?!\s*<\/script>)/.test(h), f + " has an inline script");
     assert.ok(!/<script[^>]+src="https?:/.test(h) && !/<link[^>]+href="https?:\/\/(?!labs\.vihsmai)/.test(h.replace(/<link rel="canonical"[^>]*>/, "")), f + " loads an external resource");
@@ -81,6 +81,24 @@ test("peppol page: builds a Belgian ID, flags a typo, escapes input", () => {
   d.querySelector("#country").value = "DE"; d.querySelector("#country").dispatchEvent(new w.Event("change"));
   assert.strictEqual(d.querySelector("#scheme").value, "9930");
   assert.match(d.querySelector("#tip").textContent, /Leitweg-ID/);
+});
+test("gst page: open, expired and no-limit cases", () => {
+  const w = page("gst-irp.html");
+  const d = w.document;
+  d.querySelector("#today").value = "2026-11-01";
+  d.querySelector("#inv").value = "2026-10-20";
+  d.querySelector("#go").click();
+  assert.match(d.querySelector("#out").textContent, /18 days left/);
+  assert.match(d.querySelector("#out").textContent, /2026-11-19/);
+  d.querySelector("#inv").value = "2026-09-01";
+  d.querySelector("#go").click();
+  assert.match(d.querySelector("#out").textContent, /30 days have passed/);
+  d.querySelector("#aato").value = "below10cr";
+  d.querySelector("#go").click();
+  assert.match(d.querySelector("#out").textContent, /No 30-day limit/);
+  d.querySelector("#inv").value = "not a date";
+  d.querySelector("#go").click();
+  assert.match(d.querySelector("#out").textContent, /YYYY-MM-DD/);
 });
 test("bias page: sample shows three tables with impact ratios", async () => {
   const w = page("bias.html");

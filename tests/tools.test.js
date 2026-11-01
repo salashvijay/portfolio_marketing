@@ -7,6 +7,21 @@ const secrets = require("../js/secrets.js");
 const impact = require("../js/impact.js");
 const einvoice = require("../js/einvoice.js");
 const peppol = require("../js/peppol.js");
+const gst = require("../js/gst-irp.js");
+
+test("GST 30-day window: dates, states, month ends, bad input", () => {
+  let r = gst.check("2026-10-20", "2026-11-01", "10cr_plus");
+  assert.strictEqual(r.lastDay, "2026-11-19"); assert.strictEqual(r.age, 12); assert.strictEqual(r.daysLeft, 18); assert.strictEqual(r.state, "open");
+  assert.strictEqual(r.aimFor, "2026-11-16");
+  assert.strictEqual(gst.check("2026-01-31", "2026-02-01", "10cr_plus").lastDay, "2026-03-02");
+  assert.strictEqual(gst.check("2024-02-15", "2024-02-16", "10cr_plus").lastDay, "2024-03-16");
+  assert.strictEqual(gst.check("2026-10-04", "2026-11-01", "10cr_plus").state, "urgent");
+  assert.strictEqual(gst.check("2026-10-02", "2026-11-01", "10cr_plus").state, "urgent");
+  assert.strictEqual(gst.check("2026-10-01", "2026-11-01", "10cr_plus").state, "expired");
+  assert.strictEqual(gst.check("2026-09-01", "2026-11-01", "below10cr").state, "no-limit");
+  assert.strictEqual(gst.check("2026-12-01", "2026-11-01", "10cr_plus").state, "future");
+  assert.strictEqual(gst.check("2026-02-30", "2026-11-01", "10cr_plus").ok, false);
+});
 
 const sample = fs.readFileSync(path.join(__dirname, "..", "data", "sample-invoice.xml"), "utf8");
 
