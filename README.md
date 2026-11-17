@@ -34,8 +34,7 @@ npm test        # logic tests + simulated-browser tests of every page
 - **One new tool a week** from the backlog, with tests, then add it to `index.html` and `sitemap.xml`.
 
 ### Tool backlog
-Done: CII (Factur-X / ZUGFeRD) support in the e-invoice checker; Peppol ID builder and explainer; India GST 30-day IRP deadline calculator (1 Nov 2026).
+Done: CII (Factur-X / ZUGFeRD) support in the e-invoice checker; Peppol ID builder and explainer; India GST 30-day IRP deadline calculator (1 Nov 2026); duplicate invoice finder for a pasted CSV (17 Nov 2026).
 
 1. WCAG quick check for a pasted HTML snippet (contrast, alt text, labels)
 2. DPDP consent-notice generator (India)
-3. Duplicate invoice finder for a pasted CSV (invoice number, amount, date, supplier)

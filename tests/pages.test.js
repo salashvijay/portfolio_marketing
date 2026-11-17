@@ -22,7 +22,7 @@ function page(name) {
 const tick = () => new Promise((r) => setTimeout(r, 30));
 
 test("no inline scripts or external resources (CSP-safe)", () => {
-  for (const f of ["index.html", "deadlines.html", "einvoice.html", "bias.html", "keys.html", "ai-disclosure.html", "peppol-id.html", "gst-irp.html"]) {
+  for (const f of ["index.html", "deadlines.html", "einvoice.html", "bias.html", "keys.html", "ai-disclosure.html", "peppol-id.html", "gst-irp.html", "dupes.html"]) {
     const h = fs.readFileSync(path.join(ROOT, f), "utf8");
     assert.ok(!/<script>(?!\s*<\/script>)/.test(h), f + " has an inline script");
     assert.ok(!/<script[^>]+src="https?:/.test(h) && !/<link[^>]+href="https?:\/\/(?!labs\.vihsmai)/.test(h.replace(/<link rel="canonical"[^>]*>/, "")), f + " loads an external resource");
@@ -99,6 +99,20 @@ test("gst page: open, expired and no-limit cases", () => {
   d.querySelector("#inv").value = "not a date";
   d.querySelector("#go").click();
   assert.match(d.querySelector("#out").textContent, /YYYY-MM-DD/);
+});
+test("dupes page: sample finds three groups, escapes input", () => {
+  const w = page("dupes.html");
+  const d = w.document;
+  d.querySelector("#sample").click();
+  assert.match(d.querySelector("#out").textContent, /3 possible duplicate groups in 7 invoices/);
+  assert.strictEqual(d.querySelectorAll("#out table").length, 3);
+  d.querySelector("#csv").value = "Supplier,Invoice no,Amount\n<img src=x onerror=alert(1)>,1,5\n<img src=x onerror=alert(1)>,1,5";
+  d.querySelector("#go").click();
+  assert.strictEqual(d.querySelector("#out img"), null);
+  assert.match(d.querySelector("#out").textContent, /1 possible duplicate group/);
+  d.querySelector("#csv").value = "a,b\n1,2";
+  d.querySelector("#go").click();
+  assert.match(d.querySelector("#out").textContent, /Could not find a column/);
 });
 test("bias page: sample shows three tables with impact ratios", async () => {
   const w = page("bias.html");
