@@ -1,6 +1,6 @@
 # CLAUDE.md: Vihsm Labs
 
-Free, browser-only compliance tools for Vihsm (the Owner is Vijaya Kumar Sala). Target address: `https://labs.vihsmai.com`. Each tool is a lead magnet for a paid Vihsm offer (see README).
+Free, browser-only compliance tools for Vihsm (the Owner is Vijaya Kumar Sala). Target address: `https://vihsmai.com/labs`. Each tool is a lead magnet for a paid Vihsm offer (see README).
 
 ## Hard rules
 - **Everything runs in the visitor's browser.** No uploads, no server code, no cookies, no analytics, no third-party scripts, fonts or CDNs. No inline `<script>`: the CSP in `nginx.conf` blocks it, so page code goes in `js/ui-*.js`. Shared logic goes in `js/<tool>.js`, written UMD-style so the Node tests can `require` it.

@@ -8,11 +8,11 @@ const ROOT = path.join(__dirname, "..");
 
 function page(name) {
   const html = fs.readFileSync(path.join(ROOT, name), "utf8");
-  const dom = new JSDOM(html, { runScripts: "outside-only", url: "https://labs.vihsmai.com/" + name });
+  const dom = new JSDOM(html, { runScripts: "outside-only", url: "https://vihsmai.com/labs/" + name });
   const w = dom.window;
   w.HTMLElement.prototype.scrollIntoView = () => {};
   w.fetch = async (u) => {
-    const p = path.join(ROOT, String(u).replace(/^https:\/\/labs\.vihsmai\.com\//, ""));
+    const p = path.join(ROOT, String(u).replace(/^https:\/\/vihsmai\.com\/labs\//, ""));
     const body = fs.readFileSync(p, "utf8");
     return { ok: true, json: async () => JSON.parse(body), text: async () => body };
   };
@@ -25,7 +25,7 @@ test("no inline scripts or external resources (CSP-safe)", () => {
   for (const f of ["index.html", "deadlines.html", "einvoice.html", "bias.html", "keys.html", "ai-disclosure.html", "peppol-id.html", "gst-irp.html", "dupes.html"]) {
     const h = fs.readFileSync(path.join(ROOT, f), "utf8");
     assert.ok(!/<script>(?!\s*<\/script>)/.test(h), f + " has an inline script");
-    assert.ok(!/<script[^>]+src="https?:/.test(h) && !/<link[^>]+href="https?:\/\/(?!labs\.vihsmai)/.test(h.replace(/<link rel="canonical"[^>]*>/, "")), f + " loads an external resource");
+    assert.ok(!/<script[^>]+src="https?:/.test(h) && !/<link[^>]+href="https?:\/\/(?!vihsmai\.com)/.test(h.replace(/<link rel="canonical"[^>]*>/, "")), f + " loads an external resource");
     assert.ok(/<title>.+<\/title>/.test(h) && /name="description"/.test(h), f + " missing title/description");
   }
 });

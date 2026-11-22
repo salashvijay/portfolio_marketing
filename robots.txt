@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio-marketing.vihsmai.com/sitemap.xml
+Sitemap: https://vihsmai.com/sitemap.xml
+Sitemap: https://vihsmai.com/labs/sitemap.xml

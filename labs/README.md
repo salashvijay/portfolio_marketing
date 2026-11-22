@@ -1,6 +1,6 @@
 # Vihsm Labs: free browser-only compliance tools
 
-Live (once deployed): `https://labs.vihsmai.com`
+Live (once deployed): `https://vihsmai.com/labs`
 
 | Page | Tool | Leads to (paid offer) |
 |---|---|---|
@@ -27,7 +27,7 @@ npm test        # logic tests + simulated-browser tests of every page
 ## Deploy (Coolify)
 1. Porkbun DNS: A record `labs` → `178.105.217.96`.
 2. GitHub: private repo `vihsm_labs`; push this folder.
-3. Coolify: New resource → this repo → Build pack **Dockerfile** → port **80** → domain `https://labs.vihsmai.com` → Auto Deploy on.
+3. Coolify: New resource → this repo → Build pack **Dockerfile** → port **80** → domain `https://vihsmai.com/labs` → Auto Deploy on.
 
 ## Weekly upkeep (done by the autopilot)
 - **Deadlines:** re-check each item against its source. Update `date`, `status` and `checked`, and add new mandates. Use only official sources, or mark the item `press`.
