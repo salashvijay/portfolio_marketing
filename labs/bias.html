@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free impact ratio calculator for hiring tools (NYC Local Law 144) | Vihsm Labs</title>
+<meta name="description" content="Calculate selection rates, scoring rates and impact ratios by sex, race/ethnicity and both together, the figures NYC Local Law 144 bias audits report. Free; your CSV never leaves your browser.">
+<link rel="canonical" href="https://labs.vihsmai.com/bias.html">
+<meta property="og:title" content="Free hiring-tool impact ratio calculator (NYC LL144)">
+<meta property="og:description" content="Selection and scoring rates and impact ratios by sex, race and both together. Private: runs in your browser.">
+<meta property="og:image" content="https://labs.vihsmai.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/site.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Vihsm <span>Labs</span></a>
+  <nav><a href="deadlines.html">Deadlines</a> · <a href="einvoice.html">E-invoice</a> · <a href="peppol-id.html">Peppol ID</a> · <a href="bias.html" aria-current="page">Hiring bias</a> · <a href="keys.html">Leaked keys</a> · <a href="ai-disclosure.html">AI disclosure</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>Hiring bias calculator</h1>
+  <p class="lede">Upload a CSV of past candidates, with one row per person, their category columns (for example sex and race/ethnicity) and the tool's outcome. You get selection or scoring rates and impact ratios per category and for each combination, the figures NYC Local Law 144 bias audits report.</p>
+  <p><span class="privacy">🔒 The CSV is read by your browser only. It is never uploaded.</span></p>
+
+  <div class="panel">
+    <div class="drop" id="drop">Drag a .csv file here, or <label style="display:inline;font-weight:600"><u>choose a file</u><input type="file" id="file" accept=".csv,text/csv" class="hidden"></label>
+      · <a href="#" id="sample">try a made-up sample</a></div>
+    <div id="setup" class="hidden">
+      <p class="fine" id="loaded"></p>
+      <div class="row">
+        <div><label for="g1">Category column 1</label><select id="g1"></select></div>
+        <div><label for="g2">Category column 2 (optional, for the combined table)</label><select id="g2"></select></div>
+      </div>
+      <div class="row">
+        <div><label for="oc">Outcome column</label><select id="oc"></select></div>
+        <div><label for="mode">The outcome is…</label>
+          <select id="mode">
+            <option value="selection">Selected or not (yes/no, 1/0, hired, advanced…)</option>
+            <option value="score">A score (numbers)</option>
+          </select></div>
+      </div>
+      <button id="go">Calculate</button>
+    </div>
+  </div>
+
+  <div id="out" class="result"></div>
+
+  <h2>How it's calculated</h2>
+  <ul>
+    <li><b>Selection rate</b> = people selected in a category ÷ people in that category. For a score, the <b>scoring rate</b> is the share of the category scoring above the median of the whole sample.</li>
+    <li><b>Impact ratio</b> = a category's rate ÷ the highest category's rate.</li>
+    <li>Categories under 2% of the sample may be left out of the comparison. They are still shown. Rows with a blank or "unknown" category are counted separately.</li>
+    <li>Ratios under <b>0.8</b> are highlighted using the "four-fifths" rule of thumb from US EEOC guidance. <b>NYC Local Law 144 sets no pass/fail threshold.</b> It requires the figures to be audited and published.</li>
+  </ul>
+  <p class="fine">This calculator helps you prepare and understand the numbers. It is not a bias audit. Under Local Law 144 the audit must be done by an <b>independent</b> auditor, who can't be the tool's developer, seller or user. This is information, not legal advice.</p>
+
+  <div class="cta">
+    <p><b>Need the audit itself?</b> Vihsm runs independent bias audits of hiring and scoring tools, with impact ratios, calibration and drift checks and a published summary, at a fixed price. We never audit a tool we built or sell.</p>
+    <a class="btn" href="mailto:hello@vihsmai.com?subject=Bias%20audit">Ask about an audit</a>
+  </div>
+</main>
+<footer><div class="wrap">
+  Vihsm AI · Hyderabad, India · <a href="mailto:hello@vihsmai.com">hello@vihsmai.com</a><br>
+  Information, not legal advice.
+</div></footer>
+<script src="js/impact.js"></script>
+<script src="js/ui-bias.js"></script>
+</body>
+</html>

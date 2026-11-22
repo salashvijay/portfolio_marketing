@@ -1,0 +1,12 @@
+{
+  "name": "vihsm-labs",
+  "private": true,
+  "description": "Free browser-only compliance tools by Vihsm",
+  "scripts": {
+    "test": "node --test tests/tools.test.js tests/dupes.test.js tests/pages.test.js"
+  },
+  "devDependencies": {
+    "@xmldom/xmldom": "0.8.10",
+    "jsdom": "^24.1.3"
+  }
+}

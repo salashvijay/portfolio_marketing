@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Peppol ID builder and checker: find the right Peppol participant ID | Vihsm Labs</title>
+<meta name="description" content="Turn a company or VAT number into a Peppol participant ID (0208, 9930, 0088 and 100+ schemes), check its format and check digits, and learn how to find a buyer's Peppol ID. Free; nothing leaves your browser.">
+<link rel="canonical" href="https://labs.vihsmai.com/peppol-id.html">
+<meta property="og:title" content="Free Peppol ID builder and checker">
+<meta property="og:description" content="Company or VAT number → Peppol participant ID, with check-digit validation and how to find a buyer's Peppol ID. Private: runs in your browser.">
+<meta property="og:image" content="https://labs.vihsmai.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/site.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Vihsm <span>Labs</span></a>
+  <nav><a href="deadlines.html">Deadlines</a> · <a href="einvoice.html">E-invoice</a> · <a href="peppol-id.html" aria-current="page">Peppol ID</a> · <a href="bias.html">Hiring bias</a> · <a href="keys.html">Leaked keys</a> · <a href="ai-disclosure.html">AI disclosure</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>Peppol ID builder and checker</h1>
+  <p class="lede">To send an e-invoice over Peppol you need the buyer's Peppol ID: a 4-digit scheme code, a colon and a number, such as <code>0208:0123456749</code>. Build one from a company or VAT number, or check one you were given.</p>
+  <p><span class="privacy">🔒 Nothing is looked up or sent anywhere. Your browser only checks the format and check digits.</span></p>
+
+  <div class="panel">
+    <h2 style="margin-top:0">Build a Peppol ID</h2>
+    <div class="row">
+      <div><label for="country">Country of the identifier</label><select id="country"></select></div>
+      <div><label for="scheme">Type of number</label><select id="scheme"></select></div>
+    </div>
+    <label for="num">The number</label>
+    <input type="text" id="num" placeholder="e.g. 0123.456.749" autocomplete="off" spellcheck="false">
+    <p><button id="build">Build the Peppol ID</button></p>
+    <div id="tip"></div>
+  </div>
+
+  <div class="panel">
+    <h2 style="margin-top:0">Check a Peppol ID you were given</h2>
+    <label for="pid">Peppol ID</label>
+    <input type="text" id="pid" placeholder="0208:0123456749 or iso6523-actorid-upis::9930:DE123456789" autocomplete="off" spellcheck="false">
+    <p><button id="check">Check it</button></p>
+  </div>
+
+  <div id="out" class="result"></div>
+
+  <h2>How to find a buyer's Peppol ID</h2>
+  <ol>
+    <li><b>Ask the buyer.</b> The buyer is expected to give you their Peppol ID, and you should use what they give you. Save it with their customer details: it rarely changes.</li>
+    <li><b>Look at a document they sent you.</b> In an e-invoice or order from them, their ID is the electronic address: <code>EndpointID</code> in UBL or <code>URIID</code> in CII, with the scheme code in <code>schemeID</code>.</li>
+    <li><b>Check the public <a href="https://directory.peppol.eu/">Peppol Directory</a> yourself</b>, by name or by company or VAT number. If you can't find them there and they haven't told you, contact them.</li>
+    <li><b>In Belgium</b> you can usually send to the enterprise number (0208) without asking (see the note that appears when you pick Belgium).</li>
+    <li><b>Let your access point do the routing.</b> When you send, your Peppol provider looks up the ID on the network and finds the buyer's provider. A correct ID that isn't registered on the network still can't receive.</li>
+  </ol>
+
+  <h2>What this checks, and what it doesn't</h2>
+  <ul>
+    <li>That the scheme code is on the official Peppol list (version <span id="ver"></span>), and whether it is active, deprecated or removed.</li>
+    <li>The format and check digits for the common numbers: Belgian enterprise and VAT numbers, GLN, D-U-N-S, Norwegian, Swedish, Dutch KvK, French SIREN and SIRET, Australian ABN, LEI and IBAN. Other schemes get basic checks only.</li>
+    <li>It does <b>not</b> tell you whether the company is registered on Peppol or which documents it can receive. Only the network lookup (by your access point, or the Peppol Directory) can show that. A valid check digit also doesn't prove the number belongs to the company you mean.</li>
+  </ul>
+  <p class="fine">Sources: <a href="https://docs.peppol.eu/edelivery/codelists/">Peppol Code Lists, participant identifier schemes v9.7</a> (OpenPeppol, 2 July 2026) · <a href="https://einvoice.belgium.be/en/FAQ/general-questions-about-peppol">einvoice.belgium.be, "What is a Peppol ID?"</a> (Belgian federal government) · <a href="https://xeinkauf.de/app/uploads/2025/01/2025-01-02_Germany_Identifier_v.1.1_eng.pdf">Guideline for identifier schemes of recipients in Germany v1.1</a> (KoSIT and the German Peppol Authority). Information, not legal or tax advice.</p>
+
+  <div class="cta">
+    <p><b>Have the Peppol IDs but still get PDF and paper invoices?</b> Vihsm is building a converter that turns supplier PDFs and scans into clean EN 16931 data your access point or platform can send. Belgium has required B2B e-invoices since January 2026, and France and Germany follow in 2027–28.</p>
+    <a class="btn" href="mailto:hello@vihsmai.com?subject=E-invoice%20early%20access">Ask for early access</a>
+  </div>
+</main>
+<footer><div class="wrap">
+  Vihsm AI · Hyderabad, India · <a href="mailto:hello@vihsmai.com">hello@vihsmai.com</a><br>
+  Information, not legal or tax advice.
+</div></footer>
+<script src="js/peppol.js"></script>
+<script src="js/ui-peppol.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free e-invoice checker: UBL, Factur-X, ZUGFeRD, XRechnung (EN 16931) | Vihsm Labs</title>
+<meta name="description" content="Check a UBL or CII e-invoice, or a Factur-X/ZUGFeRD PDF, for missing EN 16931 fields and wrong totals in seconds. Peppol BIS 3, XRechnung, Factur-X, ZUGFeRD. Free, and the file never leaves your browser.">
+<link rel="canonical" href="https://labs.vihsmai.com/einvoice.html">
+<meta property="og:title" content="Free e-invoice checker: UBL, Factur-X, ZUGFeRD">
+<meta property="og:description" content="Missing EN 16931 fields and wrong totals, found in seconds. Peppol BIS 3, XRechnung, Factur-X and ZUGFeRD. Private: runs in your browser.">
+<meta property="og:image" content="https://labs.vihsmai.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/site.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Vihsm <span>Labs</span></a>
+  <nav><a href="deadlines.html">Deadlines</a> · <a href="einvoice.html" aria-current="page">E-invoice</a> · <a href="peppol-id.html">Peppol ID</a> · <a href="bias.html">Hiring bias</a> · <a href="keys.html">Leaked keys</a> · <a href="ai-disclosure.html">AI disclosure</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>E-invoice checker</h1>
+  <p class="lede">Drop an e-invoice: UBL (Peppol BIS Billing 3.0, XRechnung UBL), CII XML (Factur-X, ZUGFeRD, XRechnung CII) or a Factur-X/ZUGFeRD PDF. You'll see which required fields are missing and whether the totals add up.</p>
+  <p><span class="privacy">🔒 The file is read by your browser only. It is never uploaded.</span></p>
+
+  <div class="panel">
+    <div class="drop" id="drop">Drag an invoice .xml or Factur-X/ZUGFeRD .pdf file here, or <label style="display:inline;font-weight:600"><u>choose a file</u><input type="file" id="file" accept=".xml,.pdf,text/xml,application/xml,application/pdf" class="hidden"></label></div>
+    <label for="xml">…or paste the XML</label>
+    <textarea id="xml" spellcheck="false" placeholder="&lt;Invoice xmlns=&quot;urn:oasis:names:specification:ubl:schema:xsd:Invoice-2&quot; …"></textarea>
+    <div class="row">
+      <button id="go" style="flex:0 0 auto">Check invoice</button>
+      <button id="sample" class="ghost" style="flex:0 0 auto">Try a UBL sample</button>
+      <button id="sample-cii" class="ghost" style="flex:0 0 auto">Try a Factur-X sample</button>
+    </div>
+  </div>
+
+  <div id="out" class="result"></div>
+
+  <h2>What this checks</h2>
+  <ul>
+    <li>The mandatory EN 16931 core fields: specification ID, invoice number, dates, type, currency, seller and buyer names and countries, and on each line the item, quantity, price and VAT category.</li>
+    <li>The totals: line amounts, net total, VAT total, gross total and amount due must add up (rules BR-CO-10, 13, 15 and 16).</li>
+    <li>The common Peppol and XRechnung extras: electronic addresses and the buyer reference.</li>
+    <li>For CII files, the Factur-X/ZUGFeRD profile. MINIMUM and BASIC WL carry no invoice lines, so they are not complete EN 16931 invoices; the page tells you when you have one.</li>
+    <li>For a PDF, it looks for the attached invoice XML that makes it a Factur-X or ZUGFeRD file. A PDF without one is a plain PDF invoice.</li>
+  </ul>
+  <p class="fine">This is a fast first check, not the full official Schematron validation that certified platforms and access points run. A passing result means the basics are right, not that the invoice is certified. It does not check code lists, VAT category rules, allowances and charges in detail, the PDF/A-3 format of a Factur-X file, or that the PDF text matches the XML. Rules: <a href="https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Obtaining+a+copy+of+the+European+standard+on+eInvoicing">EN 16931</a>, <a href="https://docs.peppol.eu/poacc/billing/3.0/">Peppol BIS Billing 3.0</a>, <a href="https://fnfe-mpe.org/factur-x/factur-x_en/">Factur-X (FNFE-MPE)</a>, <a href="https://xeinkauf.de/xrechnung/">XRechnung (KoSIT)</a>.</p>
+
+  <div class="cta">
+    <p><b>Still getting PDF and paper invoices from suppliers?</b> France's small businesses must send e-invoices from 1 September 2027, and Germany from 2027–28. Vihsm is building a converter that turns PDFs and scans into clean EN 16931 data for your platform.</p>
+    <a class="btn" href="mailto:hello@vihsmai.com?subject=E-invoice%20early%20access">Ask for early access</a>
+  </div>
+</main>
+<footer><div class="wrap">
+  Vihsm AI · Hyderabad, India · <a href="mailto:hello@vihsmai.com">hello@vihsmai.com</a><br>
+  Information, not legal or tax advice.
+</div></footer>
+<script src="js/einvoice.js"></script>
+<script src="js/ui-einvoice.js"></script>
+</body>
+</html>

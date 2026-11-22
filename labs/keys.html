@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free leaked API key scanner for Lovable, Bolt, Cursor and Supabase apps | Vihsm Labs</title>
+<meta name="description" content="Check your own app's code for exposed OpenAI, Anthropic, Stripe, AWS, GitHub and Supabase service_role keys. Free; your code never leaves your browser.">
+<link rel="canonical" href="https://labs.vihsmai.com/keys.html">
+<meta property="og:title" content="Free leaked API key scanner">
+<meta property="og:description" content="Exposed OpenAI, Stripe, AWS and Supabase service_role keys in your own code, found in seconds. Private: runs in your browser.">
+<meta property="og:image" content="https://labs.vihsmai.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/site.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Vihsm <span>Labs</span></a>
+  <nav><a href="deadlines.html">Deadlines</a> · <a href="einvoice.html">E-invoice</a> · <a href="peppol-id.html">Peppol ID</a> · <a href="bias.html">Hiring bias</a> · <a href="keys.html" aria-current="page">Leaked keys</a> · <a href="ai-disclosure.html">AI disclosure</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>Leaked-key scanner</h1>
+  <p class="lede">Apps built quickly with AI tools often ship secret keys inside the code the browser downloads. Choose your project folder or paste code, and see which keys are exposed and how to fix each one.</p>
+  <p><span class="privacy">🔒 Your code is read by your browser only. It is never uploaded.</span></p>
+
+  <div class="panel">
+    <label>Your project folder</label>
+    <input type="file" id="folder" webkitdirectory multiple>
+    <p class="fine">Skips node_modules, .git, build folders, images and files over 1 MB. Tip: also scan your built output (dist, build or .next/static), because that is what visitors actually download.</p>
+    <label for="code">…or paste code, a .env file or a bundled JS file</label>
+    <textarea id="code" spellcheck="false"></textarea>
+    <p><button id="go">Scan</button></p>
+    <p class="fine">Only scan code you own or have permission to check.</p>
+  </div>
+
+  <div id="out" class="result"></div>
+
+  <h2>What it looks for</h2>
+  <ul>
+    <li>Secret keys for OpenAI, Anthropic, Stripe (live and test), AWS, GitHub, Slack and Google, plus private key files.</li>
+    <li><b>Supabase keys, decoded:</b> an <i>anon</i> key is meant to be public, but only safe with Row Level Security on. A <i>service_role</i> key bypasses all security and must never reach the browser.</li>
+    <li>Variables like <code>NEXT_PUBLIC_…SECRET</code> or <code>VITE_…TOKEN</code>: anything with those prefixes is bundled into the browser.</li>
+  </ul>
+  <p class="fine">Why it matters: a public vulnerability (CVE-2025-48757) described Lovable-generated apps whose Supabase tables could be read without logging in. Lovable disputes it. Escape.tech's October 2025 scan of over 5,600 public "vibe-coded" apps found over 2,000 vulnerabilities and over 400 exposed secrets. A pattern scan like this one can miss things and can flag test keys. It is a first check, not a security audit.</p>
+
+  <div class="cta">
+    <p><b>Found something, or want a full check?</b> Vihsm reviews AI-built apps (Supabase Row Level Security, auth, exposed keys, security headers) and fixes them at a fixed price, with your written permission.</p>
+    <a class="btn" href="mailto:hello@vihsmai.com?subject=App%20security%20review">Ask for a review</a>
+  </div>
+</main>
+<footer><div class="wrap">
+  Vihsm AI · Hyderabad, India · <a href="mailto:hello@vihsmai.com">hello@vihsmai.com</a><br>
+  Information, not a security guarantee.
+</div></footer>
+<script src="js/secrets.js"></script>
+<script src="js/ui-keys.js"></script>
+</body>
+</html>

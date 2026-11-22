@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free India GST e-invoice 30-day IRP deadline calculator | Vihsm Labs</title>
+<meta name="description" content="Check how many days are left to report a GST e-invoice, credit note or debit note to the IRP under the 30-day rule (turnover Rs 10 crore and above). Free; nothing leaves your browser.">
+<link rel="canonical" href="https://labs.vihsmai.com/gst-irp.html">
+<meta property="og:title" content="Free India GST e-invoice 30-day IRP deadline calculator">
+<meta property="og:description" content="Enter the invoice date and see the last day to report it to the IRP. Private: runs in your browser.">
+<meta property="og:image" content="https://labs.vihsmai.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/site.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Vihsm <span>Labs</span></a>
+  <nav><a href="deadlines.html">Deadlines</a> · <a href="einvoice.html">E-invoice</a> · <a href="peppol-id.html">Peppol ID</a> · <a href="gst-irp.html" aria-current="page">GST 30-day</a> · <a href="bias.html">Hiring bias</a> · <a href="keys.html">Leaked keys</a> · <a href="ai-disclosure.html">AI disclosure</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>India GST e-invoice: 30-day IRP deadline calculator</h1>
+  <p class="lede">If your annual turnover is Rs 10 crore or more, an e-invoice, credit note or debit note older than 30 days can no longer be reported to the IRP. Enter the document date to see how long you have.</p>
+  <p><span class="privacy">🔒 Nothing is sent anywhere. The dates are worked out in your browser.</span></p>
+
+  <div class="panel">
+    <div class="row">
+      <div><label for="inv">Invoice (document) date</label><input type="date" id="inv"></div>
+      <div><label for="today">Today's date</label><input type="date" id="today"></div>
+    </div>
+    <label for="aato">Your aggregate annual turnover (AATO)</label>
+    <select id="aato">
+      <option value="10cr_plus">Rs 10 crore or more</option>
+      <option value="below10cr">Below Rs 10 crore</option>
+    </select>
+    <p><button id="go">Work out the deadline</button></p>
+  </div>
+
+  <div id="out" class="result"></div>
+
+  <h2>What this checks, and what it doesn't</h2>
+  <ul>
+    <li>It counts 30 calendar days from the document date, as in the GSTN advisory of 5 November 2024 (effective 1 April 2025, lowering the limit from Rs 100 crore to Rs 10 crore turnover).</li>
+    <li>It covers invoices, credit notes and debit notes that need an IRN. Below Rs 10 crore the advisory says there is no such limit "for now".</li>
+    <li>It does <b>not</b> know whether your business must issue e-invoices at all, which turnover figure counts for you, or whether the portal has changed the rule since. Check the current GSTN notices.</li>
+    <li>The advisory does not make clear whether day 30 itself is allowed, so the tool suggests reporting 3 days earlier.</li>
+  </ul>
+  <p class="fine">Source: <a href="https://www.mahagst.gov.in/public/uploads/gstnadvisory/1760531580_293%20Advisory%20Time%20Limit%20for%20Reporting%20e%20Invoice%20on%20the%20IRP%20Portal%20%20Lowering%20of%20Threshold%20to%20AATO%2010%20Crores%20and%20Above.pdf">GSTN advisory, "Time Limit for Reporting e-Invoice on the IRP Portal: Lowering of Threshold to AATO 10 Crores and Above"</a> (copy on the Maharashtra GST site). Information, not legal or tax advice.</p>
+
+  <div class="cta">
+    <p><b>Tired of keying invoices by hand?</b> Vihsm is building a converter that turns supplier PDFs and scans into clean e-invoice data, with a duplicate check.</p>
+    <a class="btn" href="mailto:hello@vihsmai.com?subject=E-invoice%20early%20access">Ask for early access</a>
+  </div>
+</main>
+<footer><div class="wrap">
+  Vihsm AI · Hyderabad, India · <a href="mailto:hello@vihsmai.com">hello@vihsmai.com</a><br>
+  Information, not legal or tax advice.
+</div></footer>
+<script src="js/gst-irp.js"></script>
+<script src="js/ui-gst.js"></script>
+</body>
+</html>

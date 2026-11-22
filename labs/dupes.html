@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free duplicate invoice finder: spot double-entered supplier invoices in a CSV | Vihsm Labs</title>
+<meta name="description" content="Paste or open a CSV of supplier invoices and find possible duplicates by supplier, invoice number, amount and date, before you pay twice. Free; nothing leaves your browser.">
+<link rel="canonical" href="https://labs.vihsmai.com/dupes.html">
+<meta property="og:title" content="Free duplicate invoice finder">
+<meta property="og:description" content="Find invoices entered twice in a CSV: same number, same amount, same date. Private: runs in your browser.">
+<meta property="og:image" content="https://labs.vihsmai.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/site.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Vihsm <span>Labs</span></a>
+  <nav><a href="deadlines.html">Deadlines</a> · <a href="einvoice.html">E-invoice</a> · <a href="peppol-id.html">Peppol ID</a> · <a href="gst-irp.html">GST 30-day</a> · <a href="dupes.html" aria-current="page">Duplicate invoices</a> · <a href="bias.html">Hiring bias</a> · <a href="keys.html">Leaked keys</a> · <a href="ai-disclosure.html">AI disclosure</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>Duplicate invoice finder</h1>
+  <p class="lede">The same supplier invoice entered twice is one of the commonest ways a business pays twice. Paste a CSV export from your accounts or payables list and see which invoices look like duplicates.</p>
+  <p><span class="privacy">🔒 Your list is checked in this page only. Nothing is uploaded or sent anywhere.</span></p>
+
+  <div class="panel">
+    <div class="drop" id="drop">Open a .csv file: <label style="display:inline;font-weight:600"><u>choose a file</u><input type="file" id="file" accept=".csv,.txt,text/csv" class="hidden"></label> or paste below.</div>
+    <label for="csv">Your CSV (first row = column names: Supplier, Invoice number, Date, Amount)</label>
+    <textarea id="csv" spellcheck="false" placeholder="Supplier,Invoice number,Invoice date,Amount&#10;Acme Ltd,INV-0042,2026-10-03,1250.00"></textarea>
+    <p><button id="go">Find duplicates</button> <button id="sample" class="ghost">Try a made-up sample</button></p>
+  </div>
+
+  <div id="out" class="result"></div>
+
+  <h2>What it looks for</h2>
+  <ol>
+    <li><b>Same supplier, invoice number and amount.</b> Upper and lower case, spaces, dashes, leading zeros and endings like "Ltd" or "Pvt" are ignored, so <code>INV-0042</code> and <code>inv 42</code> match.</li>
+    <li><b>Same supplier and invoice number, different amount or date.</b> A number should be used once; this can be a re-issued or corrected invoice, or a typing error.</li>
+    <li><b>Same supplier, amount and date, different invoice number.</b> Often the same invoice re-keyed with a changed number (for example a suffix added).</li>
+  </ol>
+
+  <h2>What it can't tell you</h2>
+  <ul>
+    <li>A flagged group is a <b>possible</b> duplicate. Suppliers do bill the same amount on the same day, and credit notes or part-payments can repeat a number. A person should check the original documents.</li>
+    <li>It reads the columns by their header names (Supplier or Vendor, Invoice number or Invoice no, Date or Invoice date, Amount or Total). Commas, semicolons, tabs and pipes are all accepted. Dates are read day-first (31/10/2026) or as 2026-10-31.</li>
+    <li>It only compares rows inside the list you give it, not against payments made earlier or in another system.</li>
+  </ul>
+  <p class="fine">Information, not accounting or audit advice.</p>
+
+  <div class="cta">
+    <p><b>Too many invoices to check by hand?</b> Vihsm builds tools that read supplier PDFs and scans, turn them into structured data and flag duplicates before they reach your payment run.</p>
+    <a class="btn" href="mailto:hello@vihsmai.com?subject=Duplicate%20invoice%20checking">Ask how it works</a>
+  </div>
+</main>
+<footer><div class="wrap">
+  Vihsm AI · Hyderabad, India · <a href="mailto:hello@vihsmai.com">hello@vihsmai.com</a><br>
+  Information, not legal or tax advice.
+</div></footer>
+<script src="js/dupes.js"></script>
+<script src="js/ui-dupes.js"></script>
+</body>
+</html>
