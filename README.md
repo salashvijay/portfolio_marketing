@@ -8,6 +8,13 @@ Public site for `vihsmai.com`. Company work only: APIs, apps, websites, and host
 2. Put the WhatsApp number in `site.js` as country code plus number, for example `9198XXXXXXXX`. Until then the WhatsApp button stays hidden.
 3. Add the Tanuku hospital link only after that client has agreed in writing.
 
+## Free tools (Vihsm Labs) at /labs
+
+`labs/` holds the free browser-only tools (merged from the old `vihsm_labs` repo on 23 Nov 2026, with its history).
+Rules: `labs/CLAUDE.md` and `labs/README.md`. Test: `npm --prefix labs test`.
+`/labs/` gets a strict Content-Security-Policy in `nginx.conf`: no third-party scripts, no uploads, no cookies.
+`labs.vihsmai.com` and `www.vihsmai.com` forward to `vihsmai.com` once those domains are attached to this app.
+
 ## Run locally
 
 Open `index.html` in a browser, or from this folder:
