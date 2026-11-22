@@ -26,6 +26,8 @@
     <a class="wordmark" href="#top">Vihsm</a>
     <nav class="nav" aria-label="Page">
       <a href="#services">Services</a>
+      <a href="#bias-audit">Bias audit</a>
+      <a href="#security-review">Security review</a>
       <a href="#einvoice">E-invoicing</a>
       <a href="#how">How we work</a>
       <a href="#tools">Free tools</a>
@@ -90,6 +92,69 @@
           <p>EU AI Act transparency pack (&euro;490), website accessibility audit and fixes to WCAG 2.1 AA (from $750), India DPDP starter (&#8377;25,000). We implement; your adviser signs off.</p>
         </article>
       </div>
+    </section>
+
+    <section id="bias-audit" class="section section-alt">
+      <div class="section-head">
+        <h2>Independent AI bias audit for hiring tools</h2>
+        <p>Fixed-price bias audits for automated hiring tools, prepared to NYC Local Law 144 requirements. For HR-tech vendors and employers whose tools score candidates in New York City, and for teams preparing for the EU AI Act (hiring AI is classed high-risk from 2 December 2027).</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card price">
+          <p class="kicker">NYC Local Law 144 bias audit</p>
+          <h3>$1,800<span> / year</span></h3>
+          <p>Selection or scoring rates and impact ratios by sex, race/ethnicity, and the two combined, with a written report and a plain-English summary for your sales and legal teams.</p>
+        </article>
+        <article class="card price card-focus">
+          <p class="kicker">Full model audit</p>
+          <h3>$4,500</h3>
+          <p>Everything above, plus calibration (ECE, Brier score) and drift (PSI), and a model card.</p>
+        </article>
+        <article class="card price">
+          <p class="kicker">Monitoring</p>
+          <h3>$300<span> / month</span></h3>
+          <p>Regular re-checks of the same measures, so changes in your tool show up early.</p>
+        </article>
+      </div>
+      <ul class="plain">
+        <li>There is no certification or government approval for bias audits, and we do not claim one.</li>
+        <li>We are independent: we never audit a tool that Vihsm built or sells, and each contract says so.</li>
+        <li>Colorado&rsquo;s automated-decision law starts 1 January 2027. We help with notice, explanation and record-keeping.</li>
+        <li>This is technical analysis, not legal advice. Please check legal questions with your lawyer.</li>
+      </ul>
+      <p><a class="button" href="mailto:hello@vihsmai.com?subject=Bias%20audit%20request&amp;body=Company%3A%0ATool%20name%3A%0AWhere%20candidates%20are%20located%3A%0AData%20format%3A">Request an audit</a></p>
+      <p class="fine">Tell us the company, tool, where candidates are located and your data format. We reply within 2 working days.</p>
+    </section>
+
+    <section id="security-review" class="section">
+      <div class="section-head">
+        <h2>Security review for AI-built apps</h2>
+        <p>Launching an app built with Lovable, Bolt, Replit or Cursor on Supabase or Firebase? Have it reviewed first. We check for secret keys exposed in the browser (including <code>service_role</code> keys), missing database access rules (Supabase RLS, Firebase rules) and missing security headers.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card price">
+          <p class="kicker">Quick scan</p>
+          <h3>$99</h3>
+          <p>A report with a fix line for every finding, a score and a grade.</p>
+        </article>
+        <article class="card price card-focus">
+          <p class="kicker">Pre-launch review</p>
+          <h3>$190</h3>
+          <p>The full review of the scope you list, before you go live.</p>
+        </article>
+        <article class="card price">
+          <p class="kicker">Fix sprint</p>
+          <h3>From $590</h3>
+          <p>We deliver the fixes as a pull request. Fixed quote after the scan, never above $1,500.</p>
+        </article>
+      </div>
+      <ul class="plain">
+        <li>You sign an order form that lists the exact URLs in scope and confirms you own the app. We never test an app without the owner&rsquo;s written permission.</li>
+        <li>We test only that scope: no denial-of-service, at most one row read per table. We delete everything we collected after the report is delivered.</li>
+        <li>Why it matters: CVE-2025-48757 (missing Supabase row-level security in Lovable-generated apps, CVSS 9.3; Lovable disputes it), and a passive scan by Escape.tech (Oct 2025) of 5,600+ vibe-coded apps found 2,000+ vulnerabilities and 400+ exposed secrets.</li>
+        <li>This is a review, not a certification. We do not call an app &ldquo;certified secure&rdquo;.</li>
+      </ul>
+      <p><a class="button" href="mailto:hello@vihsmai.com?subject=Security%20review%20booking&amp;body=App%20URL%3A%0APlatform%3A%0ADatabase%3A%0ALaunch%20date%3A%0AI%20confirm%20I%20own%20this%20app%3A%20yes">Book a review</a></p>
     </section>
 
     <section id="einvoice" class="section section-alt">
